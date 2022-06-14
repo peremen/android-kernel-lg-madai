@@ -1,0 +1,9 @@
+make BOARD_HAS_QCOM_WLAN=false BOARD_HAS_QCOM_WLAN=false BOARD_HAS_QCOM_WLAN=false
+
+2. Kernel Build
+  - Uncompress using following command at the android directory
+    Unzip LGL25_FFOS_KK_V10c_KERNEL.zip 
+  - When you compile the kernel source code, you have to add google original prebuilt source(toolchain) into the b2g directory.
+    $ cd kernel
+    $ export TARGET_PRODUCT=madai
+    $ make ARCH=arm CROSS_COMPILE=../prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi- madai-perf_defconfig zImage 
