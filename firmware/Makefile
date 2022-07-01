@@ -26,19 +26,12 @@ fw-shipped- += acenic/tg1.bin
 else
 acenic-objs := acenic/tg1.bin acenic/tg2.bin
 endif
-touch_limit_txt := $(wildcard $(srctree)/firmware/melfas/$(TARGET_PRODUCT)/*.txt)
-$(shell objcopy -I binary -O ihex $(touch_limit_txt) $(touch_limit_txt).ihex)
-
-touch_fw_list := $(subst .ihex, , $(notdir $(wildcard $(srctree)/firmware/melfas/$(TARGET_PRODUCT)/*.ihex)))
-touch_fw_files := $(foreach var, $(touch_fw_list), melfas/$(TARGET_PRODUCT)/$(var))
 atmel_fw_file := $(wildcard $(srctree)/firmware/atmel/*.fw)
 $(foreach var, $(atmel_fw_file),  $(shell objcopy -I binary -O ihex $(var) $(var).ihex))
 atmel_ihex_list := $(subst .ihex, , $(notdir $(wildcard $(srctree)/firmware/atmel/*.ihex)))
 atmel_ihex_files := $(foreach var, $(atmel_ihex_list), atmel/$(var))
 fw-shipped-$(CONFIG_TOUCHSCREEN_ATMEL_S336) += $(atmel_ihex_files)
-fw-shipped-$(CONFIG_TOUCHSCREEN_MELFAS_MMS136) += melfas/mms100a_core54_v01.mfsb
-fw-shipped-$(CONFIG_TOUCHSCREEN_MELFAS_MMS136) += $(touch_fw_files)
-synaptics_img_file := $(wildcard $(srctree)/firmware/synaptics/$(TARGET_PRODUCT)/*)
+synaptics_img_file := $(wildcard $(srctree)/firmware/synaptics/madai/*)
 synaptics_firmware := $(subst $(srctree)/firmware/,,$(synaptics_img_file))
 fw-shipped-$(CONFIG_TOUCHSCREEN_LGE_SYNAPTICS) += $(synaptics_firmware)
 fw-shipped-$(CONFIG_3C359) += 3com/3C359.bin
