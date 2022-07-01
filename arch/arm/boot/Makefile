@@ -72,8 +72,10 @@ endif
 targets += $(DTB_LIST)
 
 # Rule to build device tree blobs
-$(obj)/%.dtb: $(src)/dts/%.dts FORCE
+ifeq ($(CONFIG_MACH_MSM8926_MADAI),y)
+$(obj)/%.dtb: $(src)/dts/msm8226-madai/%.dts FORCE
 	$(call if_changed_dep,dtc)
+endif
 
 $(obj)/dtbs: $(DTB_OBJS)
 
